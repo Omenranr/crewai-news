@@ -1,0 +1,36 @@
+research_task:
+  description: >
+    If provided with a list of already_scraped_urls via the inputs dictionary, use it to filter out previously scraped URLs; otherwise, assume it's an empty list.
+    Step 1: Use SerperDevTool to perform a Google News search with a query like 'Most recent news about {topic}' and set the parameter tbm='nws' to limit results to news articles. Retrieve up to 10 URLs from the 'organic' results.
+    Step 2: Filter out any URLs from the search results that are in already_scraped_urls to avoid duplication.
+    Step 3: For each remaining new URL (up to 10), use ScrapeWebsiteTool to scrape the full content of the webpage. Handle any scraping failures gracefully by skipping problematic URLs and continuing with the next ones.
+    Step 4: Collect the scraped content into a list, ensuring each entry is the full text of the article (not just snippets or metadata).
+    Step 5: Output a dictionary with 'new_content': list of scraped article texts, and 'new_urls': list of URLs successfully scraped in this iteration.
+  expected_output: >
+    A dictionary with 'new_content': list of full article texts scraped from new URLs, and 'new_urls': list of URLs scraped in this iteration (e.g., {'new_content': ['Full text of article 1', 'Full text of article 2'], 'new_urls': ['https://example1.com', 'https://example2.com']}).
+
+evaluate_task:
+  description: >
+    Given the cumulative_content from the inputs dictionary (a list of scraped article texts), evaluate if it is sufficient to write a comprehensive news article about {topic}.
+    Perform the following checks:
+    1. **Quantity**: Ensure there are at least 5 articles or a total of 2000 words across all articles.
+    2. **Relevance**: Verify that at least 80% of the articles (e.g., 4 out of 5) are directly related to {topic} by checking for key terms or themes central to {topic} (e.g., for "AI," look for terms like "artificial intelligence," "machine learning," "chatbot," etc.).
+    3. **Diversity**: Confirm that the articles come from at least 3 distinct sources (e.g., different domains like bbc.com, wired.com, reuters.com) and cover varied aspects of {topic} (e.g., technology updates, industry impacts, ethical issues).
+    4. **Completeness**: Assess whether the content collectively provides enough detail to cover key aspects of {topic} for a news article (e.g., recent events, innovations, or trends), avoiding overly brief or repetitive texts.
+    If all criteria are met, output 'content_sufficient: yes'. Otherwise, output 'content_sufficient: no' and include a brief reason (e.g., 'content_sufficient: no - insufficient diversity').
+  expected_output: >
+    A string in the format 'content_sufficient: yes' or 'content_sufficient: no - [reason]', where [reason] explains the failure (e.g., 'insufficient quantity', 'low relevance', 'lacking diversity', 'incomplete content').
+
+write_task:
+  description: >
+    Using the cumulative_content, write an engaging and informative news article about {topic}.
+    Ensure the article is well-structured, professional, and at least 500 words long.
+  expected_output: >
+    A fully-fledged news article in markdown format.
+
+file_write_task:
+  description: >
+    Save the news article to a file named news/{date}_news_article.md.
+    Ensure the file is correctly formatted and saved in the specified directory.
+  expected_output: >
+    The news article saved to the specified file (e.g., news/2025-03-08_news_article.md).
