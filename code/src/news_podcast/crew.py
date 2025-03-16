@@ -30,6 +30,11 @@ class NewsletterGenCrew:
             max_tokens=8000
         )
 
+        # llm = LLM(
+        #     model="ollama/llama3:latest",
+        #     base_url="http://localhost:11434"
+        # )
+
         return llm
 
     def step_callback(
