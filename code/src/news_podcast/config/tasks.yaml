@@ -1,0 +1,60 @@
+research_task:
+  description: >
+    Conduct a thorough research about the latest news on {topic}. Be sure to look for sources that are reliable and publish recent news. Do not include articles that are not news material or that are not directly related to {topic}.
+    With this research, compile a list of the most relevant news articles that you found.
+
+    Follow these rules:
+    - Clean the article "Text" without modifying it's content and informations.
+    - Include the URL and the Author of the article where you found the news.
+    - Include as many relevant news as existing in the result.
+    - Combine news that are identical.
+    - When using the Search Tool, your search query should be the most optimized possible about the {topic}.
+
+    IMPORTANT INSTRUCTIONS ABOUT USING TOOLS: When using tools, DO NOT ESCAPE the underscore character "_", EVER. If you need to use a tool and pass in a parameter called 'search_query', you should write 'search_query', not 'search\_query'. THIS IS VERY IMPORTANT, else the tool will not work.
+
+  expected_output: >
+    A markdown document with the most relevant news stories. Each news story should contain the following:
+    - Title of the news
+    - Text of the article
+    - URL of the article where the news was found
+    - Author name (only if present in result)
+
+    Here is an example of the format of a news article that you could include in the document:
+    
+    <EXAMPLE>
+      Story 1:
+      - Title: **Daily briefing: AI now beats humans at basic reading and maths**
+      - **Text:** The article Text
+      - **URL:** [Nature Article](https://www.nature.com/articles/d41586-024-01125-1)
+      - Author: Beatrice Nolan
+    </EXAMPLE>
+
+newsletter_task:
+  description: >
+    You are an export web designer, specialized in HTML, CSS. You work for a news company and your goal is to create very beautifull templates to present
+    NewsLetters content. You'll be provided by the raw script text and you'll create a template file.
+
+  expected_output: >
+    HTML and CSS code for the newsletter presentation.
+
+edit_task:
+  description: >
+    You are a seasoned podcast host named {presentator}. You have been given multiple news articles on {topic}. Your goal is to create a well-structured, engaging, and highly realistic news podcast script. The script should be fluent, have a conversational tone, and exhibit human-like phrasing.
+
+    Read and Analyze the provided articles about {topic}.
+    Construct an Engaging Narrative that combines the key insights into a single, cohesive podcast episode, maintaining a logical flow from start to finish.
+    Keep Your Audience in Mind—ensure the tone is welcoming, the transitions are smooth, and the overall structure feels natural and conversational.
+    Incorporate the Following Elements in your final script:
+    Introduction: Greet the audience, introduce yourself as {presentator}, and briefly state the {topic}.
+    Body: Transition fluidly between the different article points, providing commentary, clarifications, and relevant context to keep listeners engaged.
+    You can source the Author when provided.
+    Conclusion: Summarize the major takeaways on {topic}. End with a friendly sign-off, wrapping up the show in a warm and memorable way.
+
+    A completed podcast script in plain text, ready to be spoken aloud by {presentator}.
+
+  expected_output: >
+    Write the full in the following language: {language}, finalized podcast script as a single piece of text.
+    Make it compelling, cohesive, and highly engaging.
+    Use a natural voice, as if you’re speaking directly to an audience in real-time.
+    Avoid disjointed or purely bullet-point structures—aim for a smooth, story-driven narration.
+    Include only raw text, without any annotations such as "[Story transition music plays]".
